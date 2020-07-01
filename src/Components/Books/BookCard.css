@@ -1,0 +1,15 @@
+.card{
+    height: 100%;
+}
+
+.card-header{
+    height: 25%;
+}
+
+.card-content{
+    height: 50%;
+}
+
+.card-footer{
+    height: 25%;
+}
