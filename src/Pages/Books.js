@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import BookCard from '../Components/Books/BookCard'
+import BookCard from '../Components/Books/BookCard';
+import DefaultLayout from "../Layout/Default";
 
 class Books extends Component {
     constructor(props) {
@@ -34,7 +35,8 @@ class Books extends Component {
     }
     getNextBooks(){
         const maxResults = 10;
-        const url = `https://www.googleapis.com/books/v1/volumes?q=${this.state.book}&key=AIzaSyCUWR6xnBKN7WS6CagBa4QTKGbnQMv7pnc&startIndex=${this.state.page}&maxResults=${maxResults}`
+        const apiKey = process.env.REACT_APP_API_KEY
+        const url = `https://www.googleapis.com/books/v1/volumes?q=${this.state.book}&key=${apiKey}&startIndex=${this.state.page}&maxResults=${maxResults}`
         axios.get(url)
             .then(response=>{
                 
@@ -96,6 +98,7 @@ class Books extends Component {
 
     render() {
         return (
+            <DefaultLayout>
             <div>
             <section className="container">
                 <div className="hero-body">                   
@@ -129,6 +132,7 @@ class Books extends Component {
             </div>
             }
             </div>
+            </DefaultLayout>
         );
     }
 }

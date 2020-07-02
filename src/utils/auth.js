@@ -2,7 +2,7 @@ import Axios from "axios";
 import qs from "qs"; 
 
 const axios = Axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: process.env.REACT_APP_BASE_URL, //'http://localhost:3000/',
     withCredentials: true, // this prevents cors errors, they also could have called it 'withCors'
     headers: { 'content-type': 'application/x-www-form-urlencoded' }
 });
@@ -42,16 +42,23 @@ export const login = (user)=>{
     })
 }
 
-// export const logout = () =>{
-//     return axios.get("/logout")
-//             .then(()=>{
-//                 clearUser();
-//             })
-// }
+export const logout = () =>{
+    debugger
+    return axios
+            .get("logout")
+            .then(()=>{
+                debugger
+                clearUser();
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+}
 
-// export const clearUser = () =>{
-//     window.localStorage.removeItem("user");
-// }
+export const clearUser = () =>{
+    debugger
+    window.localStorage.removeItem("user");
+}
 
 export const userIsLoggedIn = () => getUser() ? true : false;
 

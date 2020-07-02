@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import {getUser} from "../../utils/auth";
 import './BookCard.css';
-import axios from 'axios';
+import { fas, faPlus} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Axios from "axios";
 
+const axios = Axios.create({
+    baseURL: process.env.REACT_APP_BASE_URL, //'http://localhost:3000/',
+    withCredentials: true, // this prevents cors errors, they also could have called it 'withCors'
+    headers: { 'content-type': 'application/json' }
+});
 
 
 class BookCard extends Component {
@@ -11,34 +17,61 @@ class BookCard extends Component {
         super(props);
         this.viewDetailsHandler = this.viewDetailsHandler.bind(this);
         this.addToListHandler = this.addToListHandler.bind(this);
+        this.toggleForm = this.toggleForm.bind(this);
+        this.handleQtyChange = this.handleQtyChange.bind(this);
+        this.handlePriceChange = this.handlePriceChange.bind(this);
     }
 
-    user = getUser();
-
-
-
+    state={
+        showForm:false,
+        qty:0,
+        price:0,
+        successMessage:""
+    }
 
     viewDetailsHandler(){
 
     }
 
+    toggleForm(){
+        this.setState({
+            showForm:!this.state.showForm
+        })
+    }
+
+    handleQtyChange(e){        
+        this.setState({
+            qty: e.target.value,
+        })
+    }
+
+    handlePriceChange(e){
+        this.setState({
+            price:e.target.value
+        })
+    }
+
     addToListHandler(){
         
-        debugger
-        let book = this.props.book;
+        let book = {
+            book:this.props.book,
+            qty:this.state.qty,
+            price:this.state.price
+        };
         const url = "http://localhost:3000/book/add"
-        
         axios.post(url, book)
-        .then((response=>{
-            debugger
-            console.log(response);
-        }))
-        .catch((error)=>{
-            debugger
-            this.setState({
-                error:error.response.data.message
-            });
-        })
+            .then((response=>{
+                this.toggleForm();
+                this.setState({
+                    successMessage:"Added!"
+                })
+            }))
+            .catch((error)=>{
+                debugger
+                this.setState({
+                    error:error
+                });
+            })
         
     }
 
@@ -64,16 +97,44 @@ class BookCard extends Component {
                                 } 
                             </figure>
                         </div>
-                    {
-                        this.props.book.volumeInfo.authors.map((author,index)=>(
-                            <p key={index.toString()}>{author}</p> 
-                        ))
-                    }                   
+                        <div>
+                            {
+                                
+                                this.props.book.volumeInfo.authors.map((author,index)=>(
+                                    <p key={index.toString()}>{author}</p> 
+                                ))
+                            }
+                            {
+                                this.state.showForm && 
+                                <form>
+                                    <div className="level py-4">
+                                        <label className="label is-small">Qty</label>
+                                        <p className="control formControl">
+                                            <input  required="true" className="input" name="qty" type="text" onChange={this.handleQtyChange}/>
+                                        </p>
+                                        <label className="label is-small">Price($)</label>
+                                        <p className="control formControl">
+                                            <input  required="true" className="input" name="price" type="text" onChange={this.handlePriceChange}/>
+                                        </p>
+                                        <a  onClick={this.addToListHandler}>
+                                            <span className="icon"><FontAwesomeIcon icon={fas, faPlus} /></span>
+                                        </a>
+                                    </div>
+                                </form>
+                            }
+
+                            {
+                                this.state.successMessage && <p className="has-text-success">{this.state.successMessage}</p>
+                            }
+      
+                        </div>                  
                     </div>
+
+
                 </div>
                 <div className="card-footer">
                     {/* <button onClick={()=> {this.props.addToListHandler(this.props.book)}} className="button is-primary is-small mr-2">Add to List</button> */}
-                    <button onClick={this.addToListHandler} className="button is-primary is-small mr-2">Add to List</button>
+                    <button onClick={this.toggleForm} className="button is-primary is-small mr-2">Add to List</button>
                     <button  onClick={this.viewDetailsHandler} className="button is-primary is-small mr-2">Details</button>
                 </div>
             </div>

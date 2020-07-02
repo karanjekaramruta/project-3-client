@@ -6,6 +6,8 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Dashboard from './Pages/Dashboard';
 import Books from './Pages/Books';
+import Logout from './Components/auth/Logout';
+import BorrowerBooks from './Pages/BorrowerBooks';
 import { Route } from 'react-router-dom';
 
 
@@ -17,6 +19,8 @@ function App() {
         <Route exact path="/login" component ={Login} />
         <Route exact path="/dashboard" component ={Dashboard} />
         <Route exact path="/books" component ={Books} />
+        <Route exact path="/borrower/books" component ={BorrowerBooks} />
+        <Route exact path="/logout" component={Logout} />
     </div>
   );
 }
