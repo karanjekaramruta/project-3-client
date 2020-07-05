@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import BookCardBorrower from '../Components/Books/BookCardBorrower';
 import DefaultLayout from "../Layout/Default";
+import {getUser} from '../utils/auth';
 
 
 class BorrowerBooks extends Component {
@@ -14,15 +15,18 @@ class BorrowerBooks extends Component {
         error:null
     }
 
+    user = getUser();
+
     componentDidMount(){
+        debugger
         axios.get(process.env.REACT_APP_BASE_URL + 'book/allOwnedBooks', {withCredentials:true})
         .then((response=>{
             let list = [];
             response.data.map((res)=>{
-                res.map((book)=>{
-                    list.push(book)
-                })
+                list.push(res);
             })
+            
+
             this.setState({
                 listOfAvailableBooks:list,
             })
@@ -59,7 +63,18 @@ class BorrowerBooks extends Component {
             {
                 this.state.listOfAvailableBooks.length > 0 ? 
                 this.state.listOfAvailableBooks.map((book,index)=>(
-                    <BookCardBorrower key={book.id} book={book} />                    
+                    book.map((innerBook)=>(
+                        <BookCardBorrower 
+                            key={innerBook.id} 
+                            book={innerBook.book} 
+                            firstname={innerBook.firstname}
+                            lastname={innerBook.lastname}
+                            postalCode = {innerBook.postalCode}
+                            email={innerBook.email}
+
+                        />                        
+                    ))
+                    
                 ))
                 : <h1>Loading...</h1>
             }

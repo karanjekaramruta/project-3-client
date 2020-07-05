@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {signup} from "../../utils/auth";
-import { fas, faEnvelope, faUser, faKey, faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import { fas, faEnvelope, faUser, faKey, faUserPlus, faMapMarkerAlt} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Signup extends Component {
@@ -30,11 +30,12 @@ class Signup extends Component {
         debugger
         e.preventDefault();
         signup(this.state.user)
-        .then(()=> {
+        .then((response)=> {
             this.setState({
                 error: null
             }, ()=> {
                 
+                //this.props.history.push("/login")
             })
         })
         .catch((error)=> {
@@ -85,6 +86,15 @@ class Signup extends Component {
                         <input required="true" className="input" name="password" type="password" placeholder="Password" onChange={this.handleInputChange}/>
                         <span className="icon is-small is-left">
                             <FontAwesomeIcon icon={fas, faKey} />
+                        </span>
+                    </div>
+                </div>
+                <div className="field py-1">
+                    <label className="label">Password</label>
+                    <div className="control has-icons-left has-icons-right">
+                        <input required="true" className="input" name="postalCode" type="text" placeholder="Postal code" onChange={this.handleInputChange}/>
+                        <span className="icon is-small is-left">
+                            <FontAwesomeIcon icon={fas, faMapMarkerAlt} />
                         </span>
                     </div>
                 </div>

@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {getUser} from '../utils/auth'
-import { fas, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import { fas, faSignOutAlt,faBell, faUser} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom';
 
-function Navbar(props) {
-  let user = getUser();
+class Navbar extends Component {
 
-  return (
+constructor(props) {
+    super(props);
+    
+}
+
+  user = getUser();
+
+  render(){
+    return (
       
         <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
@@ -18,23 +26,29 @@ function Navbar(props) {
                 </a>
             </div>
             {
-                user ? 
+                this.user ? 
                 <div className="navbar-menu">
                     <div className="navbar-start">
-                        <a className="navbar-item" href="#">Dashboard</a>
-                        <a className="navbar-item" href="#">Books</a>
+                        <a className="navbar-item" href="/dashboard">Dashboard</a>
+                        <a className="navbar-item" href="/books">Search Book</a>
+                        <a className="navbar-item" href="/borrower/books">Books available for Rent</a>
                     </div>
                     <div className="navbar-end">
                         <div className="navbar-item">
-                        <div className="field">
-                            <input id="switchExample" type="checkbox" name="switchExample" className="switch" checked="checked"/>
-                            <label for="switchExample">Seller</label>
-                        </div>
+                            <Link to={"/notification"}>
+                                <span className="icon"><FontAwesomeIcon icon={fas, faBell} size="lg"/></span>
+                            </Link>
                         </div>
                         <div className="navbar-item">
+                            <a href="/userProfile" className="mr-2">
+                                <span className="icon"><FontAwesomeIcon icon={fas, faUser} size="lg"/></span>
+                            </a>
+                            {this.user.firstname}
+                        </div>
+                        <div className="navbar-item mb-2">
                             <div className="buttons">
-                                <span className="icon"><FontAwesomeIcon icon={fas, faSignOutAlt}/></span>
-                                <a className="button is-primary" href="/logout"><strong>Logout</strong></a>
+                                <span className="icon"><FontAwesomeIcon icon={fas, faSignOutAlt} /></span>                               
+                                <a href="/logout"><strong>Logout</strong></a>                                
                             </div>
                         </div>
                     </div>
@@ -62,6 +76,9 @@ function Navbar(props) {
 
         </nav>
   );
+  }
+
+
 }
 
 export default Navbar;
