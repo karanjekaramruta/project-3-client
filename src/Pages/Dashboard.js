@@ -46,6 +46,7 @@ class Dashboard extends Component {
                         <hr/>
                         <div className="columns is-multiline">
                             <StatusBox status="Books I Own" qty={this.state.count}/>
+                            <hr/>
                             <StatusBox status="Books rented" qty={5}/>
                         </div>
                         <div className="columns is-multiline">

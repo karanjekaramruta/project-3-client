@@ -1,0 +1,15 @@
+.accepted{
+    border-left:5px solid green  !important
+}
+
+.rejected{
+    border-left:5px solid red !important
+}
+
+.pending{
+    border-left:5px solid yellow !important
+}
+
+.hideButton{
+    display:none !important
+}

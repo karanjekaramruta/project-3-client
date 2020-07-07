@@ -8,11 +8,14 @@ import {getUser} from '../utils/auth';
 class BorrowerBooks extends Component {
     constructor(props) {
         super(props);
+        this.setSearchTerm = this.setSearchTerm.bind(this);
     }
 
     state={
         listOfAvailableBooks:[],
-        error:null
+        error:null,
+        searchTerm: '',
+        searchResults:[]
     }
 
     user = getUser();
@@ -22,13 +25,14 @@ class BorrowerBooks extends Component {
         axios.get(process.env.REACT_APP_BASE_URL + 'book/allOwnedBooks', {withCredentials:true})
         .then((response=>{
             let list = [];
-            response.data.map((res)=>{
-                list.push(res);
-            })
             
+            response.data.map((res)=>{
+                list.push(res);              
+            })
 
             this.setState({
                 listOfAvailableBooks:list,
+                searchResults:list
             })
         }))
         .catch((error)=>{
@@ -37,6 +41,28 @@ class BorrowerBooks extends Component {
                 error:error
             });
         })
+    }
+
+    setSearchTerm(e){
+        this.setState({
+            searchTerm: e.target.value,
+        });
+        this.handleSearch(e.target.value);
+    }
+
+    handleSearch(searchTerm){
+        debugger
+        let l = [];
+
+        let listOfBooksModified = this.state.listOfAvailableBooks.map((item)=>{
+            item.map(i=>
+                i.book.title.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        })
+
+        this.setState({
+            searchResults: listOfBooksModified,
+        });
     }
 
     render() {
@@ -50,7 +76,15 @@ class BorrowerBooks extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <div className="field is-grouped">
                                     <p className="control is-expanded">
-                                        <input className="input" type="text" name="search" placeholder="search" onChange={this.handleInputChange} />
+                                        <input 
+                                            className="input" 
+                                            type="text" 
+                                            name="search" 
+                                            placeholder="search" 
+                                            onChange={this.setSearchTerm} 
+                                            value={this.state.searchTerm} 
+                                            handleSearch={this.setSearchTerm}
+                                        />
                                     </p>
                                     <button type="submit" className="button is-primary">Search</button>
                             </div>              
@@ -63,7 +97,7 @@ class BorrowerBooks extends Component {
             {
                 this.state.listOfAvailableBooks.length > 0 ? 
                 this.state.listOfAvailableBooks.map((book,index)=>(
-                    book.map((innerBook)=>(
+                    book.filter(b=>b.email !== this.user.email).map((innerBook)=>(
                         <BookCardBorrower 
                             key={innerBook.id} 
                             book={innerBook.book} 
@@ -71,6 +105,7 @@ class BorrowerBooks extends Component {
                             lastname={innerBook.lastname}
                             postalCode = {innerBook.postalCode}
                             email={innerBook.email}
+                            
 
                         />                        
                     ))

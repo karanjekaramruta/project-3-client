@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar"
 
 const Default = (props) => {
     return (
-        <div className="is-fluid">
+        <div>
             <Navbar />
             {props.children}
         </div>

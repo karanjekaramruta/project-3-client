@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import DefaultLayout from "../Layout/Default";
-import {getFormattedDate} from '../utils/helper';
-import RequestCard from '../Components/Request/RequestCard';
+import StatusBox from '../Components/Common/StatusBox';
+import Heading from '../Components/Common/Heading';
+import SentRequests from '../Components/Notification/SentRequests';
+import ReceivedRequests from '../Components/Notification/ReceivedRequests';
 
 
 class Notification extends Component {
@@ -11,51 +13,67 @@ class Notification extends Component {
     }
 
     state={
-        requests:[],
+        receivedRequests:[],
+        sentRequests:[],
         error:null
     }
 
     componentDidMount(){
         debugger
-        axios.get(process.env.REACT_APP_BASE_URL + 'request/all', {withCredentials:true})
-        .then((response=>{
-            this.setState({
-                requests:response.data.requests
+
+        let receivedRequests = axios.get(process.env.REACT_APP_BASE_URL + 'request/received', {withCredentials:true});
+        let sentRequests = axios.get(process.env.REACT_APP_BASE_URL + 'request/sent', {withCredentials:true})
+        
+        axios.all([receivedRequests, sentRequests])
+            .then(
+                axios.spread((receievdRequests, sentRequests)=>{
+                    debugger
+                    this.setState({
+                        receivedRequests:receievdRequests.data.requests,
+                        sentRequests:sentRequests.data.requests
+                    })
+
+                })
+            )
+            .catch((error)=>{
+                this.setState({
+                    error:error
+                });
             })
-        }))
-        .catch((error)=>{
-            this.setState({
-                error:error
-            });
-        })
     }
 
 
     render() {
         return (
-            <DefaultLayout>
-             <div>
-            {                
-                this.state.requests.length > 0 ? 
-                this.state.requests.map((request,index)=>(
-                        <RequestCard
-                            key={index.toString()}
-                            title={request.bookId.title}
-                            authors={request.bookId.authors}
-                            requestedFromFirstName={request.requestedFrom.firstname}
-                            requestedFromLastName={request.requestedFrom.lastname}
-                            requestedFromEmail={request.requestedFrom.email}
-                            status={request.status}
-                            fromDate={getFormattedDate(request.fromDate)}
-                            toDate={getFormattedDate(request.toDate)}
-                            requestId={request._id}
-                        />
-                ))
-                : <h1>Loading...</h1>
-                
-            }                   
+        <DefaultLayout>
+            <div className="section">
+                <div className="columns">
+                    <main className="column">
+                        <Heading heading="Notifications" />
+                        <hr/>
+                        <div className="columns is-multiline">
+                            <StatusBox status="Requests Receieved" qty={this.state.receivedRequests.length}/>
+                            <StatusBox status="Requests sent" qty={this.state.sentRequests.length}/>
+                        </div>
+                        <div className="columns is-multiline">
+                        {
+                            this.state.receivedRequests.length > 0 ? 
+                                <ReceivedRequests receivedRequestsList={this.state.receivedRequests}/>
+                            :
+                            <h2>Loading...</h2>
+                        }
+                        {
+                            this.state.sentRequests.length > 0 ? 
+                                <SentRequests sentRequestsList={this.state.sentRequests}/>
+                            :
+                            <h2>Loading...</h2>
+                        }
+                        </div>
+                    </main>
+                </div>
+               
             </div>
-            </DefaultLayout>           
+        </DefaultLayout>          
         );
             
     }

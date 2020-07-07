@@ -7,6 +7,18 @@
   pointer-events: none;
 }
 
+.home-bg{
+  background-size: cover;
+  background-image: url(https://images.unsplash.com/photo-1523868157789-c313eb2f1ee9?ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80);
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  border: 0px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

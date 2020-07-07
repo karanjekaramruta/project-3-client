@@ -18,7 +18,7 @@ constructor(props) {
       
         <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item" href="#"><img src="./logo.png"/></a>
+                <a className="navbar-item" href="#"><img src="./navbarlogo.png"/></a>
                 <a role="button" className="navbar-burger burger">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>

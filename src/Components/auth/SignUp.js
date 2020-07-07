@@ -40,7 +40,9 @@ class Signup extends Component {
         })
         .catch((error)=> {
             debugger
-            this.setState({error: error.response && error.response.data})
+            this.setState(
+                {
+                    error: error.response && error.response.data})
         })
     }
 

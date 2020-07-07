@@ -10,11 +10,6 @@ class OwnedBooks extends Component {
     render() {
         return (
             <div className="column is-6 box">
-                <div className="panel">
-                    <p className="panel-heading">
-                        List of Owned Books
-                    </p>
-                </div>
                 {
                     this.props.ownedBookList.length > 0 ? 
                     this.props.ownedBookList.map((book,index)=>(
