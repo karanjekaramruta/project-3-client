@@ -18,11 +18,6 @@ export const signup = (user)=>{
         debugger       
         setUser(response.data);
     })
-    .catch(error=>{
-        this.setState({
-            error:error
-        })
-    })
 }
 
 export const login = (user)=>{
@@ -35,11 +30,6 @@ export const login = (user)=>{
     .then((response)=> {
         setUser(response.data);
     })
-    .catch(error=>{
-        this.setState({
-            error:error
-        })
-    })
 }
 
 export const logout = () =>{
@@ -49,9 +39,6 @@ export const logout = () =>{
             .then(()=>{
                 debugger
                 clearUser();
-            })
-            .catch(err=>{
-                console.log(err)
             })
 }
 

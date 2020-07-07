@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import ListItem from './ListItem';
 
 class OwnedBooks extends Component {

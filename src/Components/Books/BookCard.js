@@ -58,8 +58,8 @@ class BookCard extends Component {
             qty:this.state.qty,
             price:this.state.price
         };
-        const url = "http://localhost:3000/book/add"
-        axios.post(url, book)
+        //const url = "http://localhost:3000/book/add"
+        axios.post(process.env.REACT_APP_BASE_URL + 'book/add', book, {withCredentials:true})
             .then((response=>{
                 this.toggleForm();
                 this.setState({

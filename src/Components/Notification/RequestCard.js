@@ -23,8 +23,8 @@ class RequestCard extends Component {
     
     
     acceptRequest(){
-        const url = `http://localhost:3000/request/accept?requestId=${this.props.requestId}`
-        axios.post(url, {status:"Accepted"}, {withCredentials:true}, { contentType: 'application/json' })
+        //const url = `http://localhost:3000/request/accept?requestId=${this.props.requestId}`
+        axios.post(process.env.REACT_APP_BASE_URL+ `request/accept?requestId=${this.props.requestId}`, {status:"Accepted"}, {withCredentials:true}, { contentType: 'application/json' })
             .then((response=>{
                 this.setState({
                     successMessage:response.data.successMessage,
@@ -41,8 +41,8 @@ class RequestCard extends Component {
     }
 
     rejectRequest(){
-        const url = `http://localhost:3000/request/reject?requestId=${this.props.requestId}`
-        axios.post(url, {status:"Rejected"}, {withCredentials:true}, { contentType: 'application/json' })
+        //const url = `http://localhost:3000/request/reject?requestId=${this.props.requestId}`
+        axios.post(process.env.REACT_APP_BASE_URL+`request/reject?requestId=${this.props.requestId}`, {status:"Rejected"}, {withCredentials:true}, { contentType: 'application/json' })
             .then((response=>{
                 this.setState({
                     successMessage:response.data.successMessage,
@@ -110,6 +110,7 @@ class RequestCard extends Component {
                         }
                     </div>   
                 </div>
+                {this.hideButtons && 
                 <div className="card-footer">
                      {
                          this.state.showAcceptButton && 
@@ -124,6 +125,7 @@ class RequestCard extends Component {
                     
                     <button onClick={this.viewDetails} className="button is-info is-small mr-2">Details</button>
                 </div>
+                }
             </div>
         </div>
         );

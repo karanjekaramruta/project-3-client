@@ -59,8 +59,8 @@ class BookCardBorrower extends Component {
             comments:this.state.comments
         };
 
-        const url = "http://localhost:3000/request/add"
-        axios.post(url, request, {withCredentials:true}, { contentType: 'application/json' })
+        //const url = "http://localhost:3000/request/add"
+        axios.post(process.env.REACT_APP_BASE_URL + 'request/add', request, {withCredentials:true}, { contentType: 'application/json' })
             .then((response=>{
                 this.setState({
                     successMessage:"Request sent!"

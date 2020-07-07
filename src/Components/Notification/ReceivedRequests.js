@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RequestCard from '../../Components/Notification/RequestCard';
 import {getFormattedDate} from '../../utils/helper';
+import { Link } from 'react-router-dom';
 
 class ReceivedRequests extends Component {
     constructor(props) {
@@ -13,6 +14,13 @@ class ReceivedRequests extends Component {
             {
                 this.props.receivedRequestsList.length > 0 ? 
                 this.props.receivedRequestsList.map((request,index)=>(
+                    <Link 
+                        to={{
+                            pathname:"/request/detail",
+                            search:`?requestId=${request._id}`,
+                            state:{request:request}
+                        }}
+                    >
                     <RequestCard
                             key={index.toString()}
                             imageUrl = {request.bookId.imageLinks.smallThumbnail !== null ? request.bookId.imageLinks.smallThumbnail : './book.png'}
@@ -29,6 +37,7 @@ class ReceivedRequests extends Component {
                             classNameForButton={getClassNameForButton(request.status)}
 
                     />
+                     </Link>
                 ))
                  :
                 <h2>Loading...</h2>
