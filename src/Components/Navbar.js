@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {getUser} from '../utils/auth'
-import { fas, faSignOutAlt,faBell, faUser} from "@fortawesome/free-solid-svg-icons";
+import { fas, faSignOutAlt,faBell, faUser, faBook} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
+import './Navbar.css';
 
 class Navbar extends Component {
 
 constructor(props) {
-    super(props);
-    
+    super(props);   
 }
 
   user = getUser();
@@ -18,7 +18,9 @@ constructor(props) {
       
         <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item" href="#"><img src="./navbarlogo.png"/></a>
+            <span className="logo">
+                <FontAwesomeIcon icon={(fas, faBook)} size="lg"/>
+              </span>
                 <a role="button" className="navbar-burger burger">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -29,26 +31,26 @@ constructor(props) {
                 this.user ? 
                 <div className="navbar-menu">
                     <div className="navbar-start">
-                        <a className="navbar-item" href="/dashboard">Dashboard</a>
-                        <a className="navbar-item" href="/books">Search Book</a>
-                        <a className="navbar-item" href="/borrower/books">Books available for Rent</a>
+                        <Link className="navbar-item link grow" to={"/dashboard"}>Dashboard</Link>
+                        <Link className="navbar-item link grow" to={"/books"}>Search Book</Link>
+                        <Link className="navbar-item link grow" to={"/borrower/books"}>Books available for Rent</Link>
                     </div>
                     <div className="navbar-end">
                         <div className="navbar-item">
-                            <Link to={"/notification"}>
-                                <span className="icon"><FontAwesomeIcon icon={fas, faBell} size="lg"/></span>
+                            <Link className="navbar-item link" to={"/notification"}>
+                                <span className="icon"><FontAwesomeIcon icon={fas, faBell} size="lg"/><sup>3</sup></span>
                             </Link>
                         </div>
                         <div className="navbar-item">
-                            <a href="/userProfile" className="mr-2">
+                            <Link to={"/userProfile"} className="mr-2">
                                 <span className="icon"><FontAwesomeIcon icon={fas, faUser} size="lg"/></span>
-                            </a>
+                            </Link>
                             {this.user.firstname}
                         </div>
                         <div className="navbar-item mb-2">
                             <div className="buttons">
-                                <span className="icon"><FontAwesomeIcon icon={fas, faSignOutAlt} /></span>                               
-                                <a href="/logout"><strong>Logout</strong></a>                                
+                                <span className="icon"><FontAwesomeIcon icon={fas, faSignOutAlt} size="lg" /></span>                               
+                                <Link className="navbar-item link grow" to={"/logout"}>Logout</Link>                                
                             </div>
                         </div>
                     </div>

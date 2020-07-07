@@ -14,8 +14,6 @@ class RequestCard extends Component {
 
     state={
         successMessage:"",
-        classNameForCard:this.props.cardClass,
-        classNameForButton:this.props.classNameForButton,
         showRejectButton:true,
         showAcceptButton:true
     }
@@ -23,12 +21,10 @@ class RequestCard extends Component {
     
     
     acceptRequest(){
-        //const url = `http://localhost:3000/request/accept?requestId=${this.props.requestId}`
         axios.post(process.env.REACT_APP_BASE_URL+ `request/accept?requestId=${this.props.requestId}`, {status:"Accepted"}, {withCredentials:true}, { contentType: 'application/json' })
             .then((response=>{
                 this.setState({
                     successMessage:response.data.successMessage,
-                    classNameForCard: 'accepted',
                     showAcceptButton:!this.state.showAcceptButton,
                 })
             }))
@@ -41,12 +37,10 @@ class RequestCard extends Component {
     }
 
     rejectRequest(){
-        //const url = `http://localhost:3000/request/reject?requestId=${this.props.requestId}`
         axios.post(process.env.REACT_APP_BASE_URL+`request/reject?requestId=${this.props.requestId}`, {status:"Rejected"}, {withCredentials:true}, { contentType: 'application/json' })
             .then((response=>{
                 this.setState({
                     successMessage:response.data.successMessage,
-                    classNameForCard: 'rejected',
                     showRejectButton:!this.state.showRejectButton
                 })
             }))
@@ -59,7 +53,6 @@ class RequestCard extends Component {
     }
 
 
-    statusBasedClassForCard = this.props.status === "Accepted" ? "accepted" : "rejected";
     
     
     render() {
@@ -122,8 +115,6 @@ class RequestCard extends Component {
                             <button onClick={this.rejectRequest} className= {"button is-danger is-small mr-2"}>
                                 Reject
                             </button> }
-                    
-                    <button onClick={this.viewDetails} className="button is-info is-small mr-2">Details</button>
                 </div>
                 }
             </div>

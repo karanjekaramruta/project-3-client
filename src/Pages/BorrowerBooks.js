@@ -8,14 +8,11 @@ import {getUser} from '../utils/auth';
 class BorrowerBooks extends Component {
     constructor(props) {
         super(props);
-        this.setSearchTerm = this.setSearchTerm.bind(this);
     }
 
     state={
         listOfAvailableBooks:[],
-        error:null,
-        searchTerm: '',
-        searchResults:[]
+        error:null
     }
 
     user = getUser();
@@ -43,56 +40,12 @@ class BorrowerBooks extends Component {
         })
     }
 
-    setSearchTerm(e){
-        this.setState({
-            searchTerm: e.target.value,
-        });
-        this.handleSearch(e.target.value);
-    }
-
-    handleSearch(searchTerm){
-        debugger
-        let l = [];
-
-        let listOfBooksModified = this.state.listOfAvailableBooks.map((item)=>{
-            item.map(i=>
-                i.book.title.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-        })
-
-        this.setState({
-            searchResults: listOfBooksModified,
-        });
-    }
 
     render() {
         return (
             <DefaultLayout>
             <div>
-            <section className="container">
-                <div className="hero-body">                   
-                    <div className="column is-12">
-                        <h1 className="title">Search Books</h1>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="field is-grouped">
-                                    <p className="control is-expanded">
-                                        <input 
-                                            className="input" 
-                                            type="text" 
-                                            name="search" 
-                                            placeholder="search" 
-                                            onChange={this.setSearchTerm} 
-                                            value={this.state.searchTerm} 
-                                            handleSearch={this.setSearchTerm}
-                                        />
-                                    </p>
-                                    <button type="submit" className="button is-primary">Search</button>
-                            </div>              
-                        </form>
-                    </div>
-                </div>
-            </section>
-            <section className="container">
+            <section className="container py-5">
             <div className="columns is-multiline">
             {
                 this.state.listOfAvailableBooks.length > 0 ? 

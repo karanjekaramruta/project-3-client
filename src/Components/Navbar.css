@@ -1,0 +1,29 @@
+
+
+.navbar a{
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    color:white
+}
+
+.navbar a:hover{
+    text-decoration: none;
+}
+
+.navbar a.grow::after {
+    content: ' ';
+    position: absolute;
+    top: 80%;
+    left: 25%;
+    width: 50%;
+    height: 1px;
+    border-bottom: 2px solid white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  .navbar a.grow:hover::after {
+    width: 100%;
+    left: 0;
+}

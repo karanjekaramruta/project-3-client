@@ -1,0 +1,7 @@
+.box.owned{
+    border-top:5px solid navy;
+}
+
+.box.rented{
+    border-top:5px solid #e79c2a;
+}

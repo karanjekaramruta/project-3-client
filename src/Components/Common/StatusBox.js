@@ -1,10 +1,11 @@
 import React from "react";
+import './StatusBox.css';
 
 function StatusBox(props) {
-  debugger
+  
   return (
     <div className="column">
-      <div className="box">
+      <div className={"box " + props.nameOfClass}>
         <div className="subtitle">
           {props.status} {props.qty}
         </div>
