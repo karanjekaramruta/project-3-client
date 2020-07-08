@@ -81,20 +81,20 @@ class RequestCard extends Component {
                         (this.props.firstname || this.props.lastname) &&
                         <p>
                             <span className="icon is-small is-left mr-2">
-                                <FontAwesomeIcon icon={fas, faUser} />
+                                <FontAwesomeIcon icon={(fas , faUser)} />
                             </span>{this.props.firstname} {this.props.lastname}
                         </p>
                     }
 
                         <p>
                             <span className="icon is-small is-left mr-2">
-                                <FontAwesomeIcon icon={fas, faEnvelope} />
+                                <FontAwesomeIcon icon={(fas, faEnvelope)} />
                             </span>
                             {this.props.email}
                         </p>
                         <p> 
                             <span className="icon is-small is-left mr-2">
-                                <FontAwesomeIcon icon={fas, faCalendar} />
+                                <FontAwesomeIcon icon={(fas, faCalendar)} />
                             </span>
                             {this.props.fromDate} to {this.props.toDate}
                         </p>

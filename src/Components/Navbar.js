@@ -17,7 +17,7 @@ class Navbar extends Component {
             <span className="logo">
                 <FontAwesomeIcon icon={(fas, faBook)} size="lg"/>
               </span>
-                <a role="button" href="#" className="navbar-burger burger">
+                <a role="button" href="/" className="navbar-burger burger">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -33,19 +33,19 @@ class Navbar extends Component {
                     </div>
                     <div className="navbar-end">
                         <div className="navbar-item">
-                            <Link className="navbar-item link" to={"/notification"}>
-                                <span className="icon"><FontAwesomeIcon icon={fas, faBell} size="lg"/><sup>3</sup></span>
+                            <Link className="navbar-item link" to={"/notification"} >
+                                <span className="icon"><FontAwesomeIcon icon={(fas, faBell)} size="lg"/><sup>3</sup></span>
                             </Link>
                         </div>
                         <div className="navbar-item">
                             <Link to="/userProfile" className="mr-2">
-                                <span className="icon"><FontAwesomeIcon icon={fas, faUser} size="lg"/></span>
+                                <span className="icon"><FontAwesomeIcon icon={(fas, faUser)} size="lg"/></span>
                             </Link>
                             {this.user.firstname}
                         </div>
                         <div className="navbar-item mb-2">
                             <div className="buttons">
-                                <span className="icon"><FontAwesomeIcon icon={fas, faSignOutAlt} size="lg" /></span>                               
+                                <span className="icon"><FontAwesomeIcon icon={(fas, faSignOutAlt)} size="lg" /></span>                               
                                 <Link className="navbar-item link grow" to={"/logout"}>Logout</Link>                                
                             </div>
                         </div>
@@ -54,17 +54,17 @@ class Navbar extends Component {
                 :
                 <div className="navbar-menu">
                     <div className="navbar-start">
-                        <a className="navbar-item" href="#">Books</a>
+                        <a className="navbar-item" href="/books">Books</a>
                     </div>
                     <div className="navbar-end">
                         <div className="navbar-item">
                             <div className="buttons">
-                                <a className="button is-primary" href="#"><strong>Sign Up</strong></a>
+                                <a className="button is-primary" href="/"><strong>Sign Up</strong></a>
                             </div>
                         </div>
                         <div className="navbar-item">
                             <div className="buttons">
-                                <a className="button is-primary" href="#"><strong>Login</strong></a>
+                                <a className="button is-primary" href="/login"><strong>Login</strong></a>
                             </div>
                         </div>
                     </div>

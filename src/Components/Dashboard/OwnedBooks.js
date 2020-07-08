@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import ListItem from './ListItem';
 
 class OwnedBooks extends Component {
-    constructor(props) {
-        super(props);      
-    }
 
     render() {
         return (

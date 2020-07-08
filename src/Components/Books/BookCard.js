@@ -92,8 +92,8 @@ class BookCard extends Component {
                             <figure className="image is-48x48">
                                 {
                                     this.props.book.volumeInfo.imageLinks.smallThumbnail ? 
-                                    <img src={this.props.book.volumeInfo.imageLinks.smallThumbnail} /> :
-                                    <img src="./images/book.png" />
+                                    <img src={this.props.book.volumeInfo.imageLinks.smallThumbnail} alt="book-img"/> :
+                                    <img src="./images/book.png" alt="book-img" />
                                 } 
                             </figure>
                         </div>
@@ -116,8 +116,8 @@ class BookCard extends Component {
                                         <p className="control formControl">
                                             <input  required="true" className="input" name="price" type="text" onChange={this.handlePriceChange}/>
                                         </p>
-                                        <a  onClick={this.addToListHandler}>
-                                            <span className="icon"><FontAwesomeIcon icon={fas, faPlus} /></span>
+                                        <a  href="#" onClick={this.addToListHandler}>
+                                            <span className="icon"><FontAwesomeIcon icon={(fas, faPlus)} /></span>
                                         </a>
                                     </div>
                                 </form>

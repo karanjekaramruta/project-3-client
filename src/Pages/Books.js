@@ -77,7 +77,6 @@ class Books extends Component {
     handlePrev(){
         let totalResults = this.state.results.length-10;
         let resultsCopy = [...this.state.results];
-        let resultsCopy1 = resultsCopy.splice(totalResults, 10);
         
         this.setState({
             results:resultsCopy,

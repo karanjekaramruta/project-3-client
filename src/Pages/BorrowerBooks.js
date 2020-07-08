@@ -6,9 +6,6 @@ import {getUser} from '../utils/auth';
 
 
 class BorrowerBooks extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     state={
         listOfAvailableBooks:[],
@@ -24,7 +21,7 @@ class BorrowerBooks extends Component {
             let list = [];
             
             response.data.map((res)=>{
-                list.push(res);              
+                return list.push(res);              
             })
 
             this.setState({

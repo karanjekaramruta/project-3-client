@@ -186,9 +186,9 @@ class BookCardBorrower extends Component {
               <div className="media-left">
                 <figure className="image is-48x48">
                   {this.props.book.imageLinks.smallThumbnail ? (
-                    <img src={this.props.book.imageLinks.smallThumbnail} />
+                    <img src={this.props.book.imageLinks.smallThumbnail} alt="book-img"/>
                   ) : (
-                    <img src="../book.png" />
+                    <img src="../book.png" alt="book-img" />
                   )}
                 </figure>
               </div>

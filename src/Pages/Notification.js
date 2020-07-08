@@ -7,10 +7,7 @@ import SentRequests from "../Components/Notification/SentRequests";
 import ReceivedRequests from "../Components/Notification/ReceivedRequests";
 
 class Notification extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+    
   state = {
     receivedRequests: [],
     sentRequests: [],

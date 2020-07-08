@@ -4,9 +4,6 @@ import {getFormattedDate} from '../../utils/helper';
 import { Link } from 'react-router-dom';
 
 class ReceivedRequests extends Component {
-    constructor(props) {
-        super(props);        
-    }
     
     render() {        
         return (
@@ -63,12 +60,15 @@ function getClassNameBasedOnStatus(status){
         case 'rejected':
             className = 'rejected'
             break;
+        default:
+            className = "pending"
+            break;
     }
     return className;
 }
 
 function getClassNameForButton(status){
-    let className = "";
+    let className="";
     return status.toLowerCase() === 'accepted' || 'rejected' ? className = "hideButton" : ""
 
 }

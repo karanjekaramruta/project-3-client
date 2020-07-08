@@ -39,7 +39,6 @@ class RequestDetail extends Component {
 
   handleUpdate(){
     
-    const url = `http://localhost:3000/request/update?requestId=${this.state.request._id}`;
     let commentsCopy = this.state.comments;
     let newComment = {
         username:this.user.firstname,
