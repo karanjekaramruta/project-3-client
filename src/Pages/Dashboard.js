@@ -67,12 +67,12 @@ class Dashboard extends Component {
                 {this.state.ownedBookList.length > 0 ? (
                   <OwnedBooks ownedBookList={this.state.ownedBookList} />
                 ) : (
-                  <h2 className="subtitle px-5 py-2">You have not listed any books yet!</h2>
+                  <div className="column is-6"><h2 className="subtitle px-5 py-2">You have not listed any books yet!</h2></div>
                 )}
                 {this.state.rentedBookList.length > 0 ? (
                   <RentedBooks rentedBookList={this.state.rentedBookList} />
                 ) : (
-                  <h2 className="subtitle px-5 py-2">No Books Rented</h2>
+                  <div className="column is-6"><h2 className="subtitle px-5 py-2">No Books Rented</h2></div>
                 )}
               </div>
             </main>

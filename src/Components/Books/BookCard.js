@@ -51,8 +51,8 @@ class BookCard extends Component {
         })
     }
 
-    addToListHandler(){
-        
+    addToListHandler(e){
+        e.preventDefault();
         let book = {
             book:this.props.book,
             qty:this.state.qty,
@@ -91,7 +91,7 @@ class BookCard extends Component {
                         <div className="media-left">
                             <figure className="image is-48x48">
                                 {
-                                    this.props.book.volumeInfo.imageLinks.smallThumbnail ? 
+                                    this.props.book.volumeInfo.imageLinks.smallThumbnail !== null? 
                                     <img src={this.props.book.volumeInfo.imageLinks.smallThumbnail} alt="book-img"/> :
                                     <img src="./images/book.png" alt="book-img" />
                                 } 

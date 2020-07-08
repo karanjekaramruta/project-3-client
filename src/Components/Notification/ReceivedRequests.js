@@ -31,6 +31,7 @@ class ReceivedRequests extends Component {
                             toDate={getFormattedDate(request.toDate)}
                             requestId={request._id}
                             cardClass={getClassNameBasedOnStatus(request.status)}
+                            hideButtons={true}
                             
 
                     />

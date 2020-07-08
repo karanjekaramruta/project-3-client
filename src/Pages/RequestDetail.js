@@ -24,7 +24,7 @@ class RequestDetail extends Component {
 
   state = {
     request: this.props.location.state.request,
-    comments:this.props.location.state.request.comments,
+    comments:[],
     successMessage:"",
     message:""
   };
@@ -33,6 +33,21 @@ class RequestDetail extends Component {
     this.setState({
         message:e.target.value
     })
+  }
+
+  componentDidMount(){
+    debugger
+    axios.get(process.env.REACT_APP_BASE_URL + `comments/all?requestId=${this.state.request._id}`)
+        .then(response=>{            
+            this.setState({
+                comments:response.data.comments
+            })
+        })
+        .catch(err=>{
+            this.setState({
+                error:err
+            })
+        })
   }
 
   
@@ -114,18 +129,23 @@ class RequestDetail extends Component {
                       {getFormattedDate(this.state.request.fromDate)} to
                       {getFormattedDate(this.state.request.toDate)}
                     </p>
+                    <p><span className="tag is-info mr-2">status</span>{this.state.request.status}</p>
 
                   </div>
                 </div>
+                
 
               </div>
               
             </div>
             <div className="column is-4 py-4 px-2">
                 <div className="py-5">
-                    {this.state.comments.map((comment)=>(
+                    {this.state.comments.length > 0 ? 
+                      this.state.comments.map((comment)=>(
                         <p><span className="tag is-info mb-2 mr-2">{comment.username}</span>{comment.message}</p>
-                    ))}
+                    ))
+                    : <h2>No comments</h2>
+                    }
                 </div>
                 <div class="field">
                     <div class="control">

@@ -14,8 +14,6 @@ class RequestCard extends Component {
 
     state={
         successMessage:"",
-        showRejectButton:true,
-        showAcceptButton:true
     }
 
     
@@ -24,8 +22,7 @@ class RequestCard extends Component {
         axios.post(process.env.REACT_APP_BASE_URL+ `request/accept?requestId=${this.props.requestId}`, {status:"Accepted"}, {withCredentials:true}, { contentType: 'application/json' })
             .then((response=>{
                 this.setState({
-                    successMessage:response.data.successMessage,
-                    showAcceptButton:!this.state.showAcceptButton,
+                    successMessage:response.data.successMessage
                 })
             }))
             .catch((error)=>{
@@ -40,8 +37,7 @@ class RequestCard extends Component {
         axios.post(process.env.REACT_APP_BASE_URL+`request/reject?requestId=${this.props.requestId}`, {status:"Rejected"}, {withCredentials:true}, { contentType: 'application/json' })
             .then((response=>{
                 this.setState({
-                    successMessage:response.data.successMessage,
-                    showRejectButton:!this.state.showRejectButton
+                    successMessage:response.data.successMessage
                 })
             }))
             .catch((error)=>{
@@ -58,7 +54,7 @@ class RequestCard extends Component {
     render() {
         return (
         <div className="column">
-            <div className={"card " + this.state.classNameForCard}>
+            <div className="card">
                 <div className="card-content">
                     <div className="media">
                         <div className="media-left">
@@ -103,18 +99,10 @@ class RequestCard extends Component {
                         }
                     </div>   
                 </div>
-                {this.hideButtons && 
+                {this.props.hideButtons && 
                 <div className="card-footer">
-                     {
-                         this.state.showAcceptButton && 
-                            <button onClick={this.acceptRequest} className= {"button is-primary is-small mr-2"}>
-                                Accept
-                            </button>}
-                     {
-                         this.state.showRejectButton && 
-                            <button onClick={this.rejectRequest} className= {"button is-danger is-small mr-2"}>
-                                Reject
-                            </button> }
+                    <button onClick={this.acceptRequest} className= {"button is-primary is-small mr-2"}>Accept</button>
+                    <button onClick={this.rejectRequest} className= {"button is-danger is-small mr-2"}>Reject</button>
                 </div>
                 }
             </div>

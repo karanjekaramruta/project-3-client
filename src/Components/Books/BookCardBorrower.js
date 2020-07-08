@@ -26,13 +26,18 @@ class BookCardBorrower extends Component {
     showModal: false,
     selectedFromDate: null,
     selectedToDate: null,
-    comments: "",
+    comments: {},
     successMessage: "",
   };
 
   handleInputChange(e) {
+
+    let newComment = {
+        username:this.user.firstname,
+        message:e.target.value
+    }
     this.setState({
-      comments: e.target.value,
+      comments: newComment,
     });
   }
 
@@ -50,6 +55,7 @@ class BookCardBorrower extends Component {
 
   sendRequest() {
     debugger;
+
     let request = {
       bookId: this.props.book._id,
       requestedTo: this.props.email,

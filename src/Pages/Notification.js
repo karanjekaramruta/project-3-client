@@ -68,12 +68,12 @@ class Notification extends Component {
                     receivedRequestsList={this.state.receivedRequests}
                   />
                 ) : (
-                  <h2>Loading...</h2>
+                  <div className="column is-6"><h2 className="subtitle px-5 py-2">No requests received</h2></div>
                 )}
                 {this.state.sentRequests.length > 0 ? (
                   <SentRequests sentRequestsList={this.state.sentRequests} />
                 ) : (
-                  <h2>Loading...</h2>
+                  <div className="column is-6"><h2 className="subtitle px-5 py-2">No requests sent</h2></div>
                 )}
               </div>
             </main>

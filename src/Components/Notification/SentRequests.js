@@ -31,7 +31,7 @@ class SentRequests extends Component {
                             fromDate={getFormattedDate(request.fromDate)}
                             toDate={getFormattedDate(request.toDate)}
                             requestId={request._id}
-                            hideButtons={true}
+                            hideButtons={false}
                     />
                 </Link>
                 ))
