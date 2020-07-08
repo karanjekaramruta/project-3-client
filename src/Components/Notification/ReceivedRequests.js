@@ -31,7 +31,7 @@ class ReceivedRequests extends Component {
                             toDate={getFormattedDate(request.toDate)}
                             requestId={request._id}
                             cardClass={getClassNameBasedOnStatus(request.status)}
-                            classNameForButton={getClassNameForButton(request.status)}
+                            
 
                     />
                      </Link>
@@ -67,9 +67,8 @@ function getClassNameBasedOnStatus(status){
     return className;
 }
 
-function getClassNameForButton(status){
-    let className="";
-    status.toLowerCase() === 'accepted' || 'rejected' ? className = "hideButton" : "";
-    return className;
+// function getClassNameForButton(status){
+//     let className="";
+//     return status.toLowerCase() === 'accepted' || 'rejected' ? this.className = "hideButton" : "";
 
-}
+// }
