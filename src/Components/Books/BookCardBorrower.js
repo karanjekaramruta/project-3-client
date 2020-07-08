@@ -8,6 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { getUser } from "../../utils/auth";
 import axios from "axios";
 
+
+
 class BookCardBorrower extends Component {
   constructor(props) {
     debugger;
@@ -82,45 +84,98 @@ class BookCardBorrower extends Component {
     return (
       <div className="column is-4">
         <Modal
-          width={950}
-          height={340}
           isOpen={this.state.showModal}
           onRequestClose={this.hideModal}
+          style={{
+            overlay: {
+                position: 'fixed',
+                top: 0,
+                left: 50,
+                right: 0,
+                bottom: 40,
+                backgroundColor: 'rgba(255, 255, 255, 0.75)'
+            },
+            content: {
+                position: 'absolute',
+                top: '150px',
+                left: '180px',
+                right: '250px',
+                bottom: '120px',
+                border: '1px solid #ccc',
+                background: '#fff',
+                overflow: 'auto',
+                WebkitOverflowScrolling: 'touch',
+                borderRadius: '4px',
+                outline: 'none',
+                padding: '2px'
+            }
+        }}
         >
-          <h1>Request A Book for Rent</h1>
-          <label className="label" htmlFor="">
-            From
-          </label>
-          <DatePicker
-            selected={this.state.selectedFromDate}
-            onChange={(date) => this.setState({ selectedFromDate: date })}
-            dateFormat="dd/MM/yyyy"
-            minDate={new Date()}
-          />
-          <label htmlFor="">To</label>
-          <DatePicker
-            selected={this.state.selectedToDate}
-            onChange={(date) => this.setState({ selectedToDate: date })}
-            dateFormat="dd/MM/yyyy"
-            minDate={new Date()}
-          />
-          <textarea
-            name="comments"
-            rows="5"
-            onChange={this.handleInputChange}
-          ></textarea>
-          <div className="mt-2">
-            <button
-              onClick={this.sendRequest}
-              className="button is-primary mr-2"
-            >
-              Send Request
-            </button>
-            <button onClick={this.hideModal} className="button is-primary">
-              Close
-            </button>
-          </div>
-          {this.state.successMessage && <p>{this.state.successMessage}</p>}
+          <h1 className="subtitle ml-5 py-2">Request A Book for Rent</h1>
+            <div class="field is-horizontal">
+                <div className="field-label is-normal">
+                        <label className="label" htmlFor="">From</label>
+                </div>            
+                <div class="field-body">
+                    <div className="field">
+                        <div className="control">
+                            <DatePicker
+                                selected={this.state.selectedFromDate}
+                                onChange={(date) => this.setState({ selectedFromDate: date })}
+                                dateFormat="dd/MM/yyyy"
+                                minDate={new Date()}
+                            />
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+            <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                    <label className="label" htmlFor="">To</label>
+                </div>
+                <div className="field-body">
+                    <div className="field">
+                        <div className="control">
+                            <DatePicker
+                                selected={this.state.selectedToDate}
+                                onChange={(date) => this.setState({ selectedToDate: date })}
+                                dateFormat="dd/MM/yyyy"
+                                minDate={new Date()}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="field is-horizontal">
+                <div className="field-label is-normal">
+                    <label className="label" htmlFor="">Comments</label>
+                </div>
+                <div className="field-body">
+                    <div className="field">
+                        <div className="control">
+                        <textarea
+                            name="comments"
+                            rows="5"
+                            cols="20"
+                            onChange={this.handleInputChange}
+                            className="textarea is-info"
+                        ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label"></div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <button onClick={this.sendRequest} className="button is-primary mr-2">Send Request</button>
+                            <button onClick={this.hideModal} className="button is-primary">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {this.state.successMessage && <p>{this.state.successMessage}</p>}
         </Modal>
         <div className="card">
           <header className="card-header">

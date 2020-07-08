@@ -7,10 +7,6 @@ import './Navbar.css';
 
 class Navbar extends Component {
 
-constructor(props) {
-    super(props);   
-}
-
   user = getUser();
 
   render(){
@@ -21,7 +17,7 @@ constructor(props) {
             <span className="logo">
                 <FontAwesomeIcon icon={(fas, faBook)} size="lg"/>
               </span>
-                <a role="button" className="navbar-burger burger">
+                <a role="button" href="#" className="navbar-burger burger">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -42,7 +38,7 @@ constructor(props) {
                             </Link>
                         </div>
                         <div className="navbar-item">
-                            <Link to={"/userProfile"} className="mr-2">
+                            <Link to="/userProfile" className="mr-2">
                                 <span className="icon"><FontAwesomeIcon icon={fas, faUser} size="lg"/></span>
                             </Link>
                             {this.user.firstname}
