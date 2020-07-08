@@ -75,7 +75,7 @@ class Books extends Component {
     }
 
     handlePrev(){
-        let totalResults = this.state.results.length-10;
+        //let totalResults = this.state.results.length-10;
         let resultsCopy = [...this.state.results];
         
         this.setState({
@@ -92,7 +92,6 @@ class Books extends Component {
         this.setState({
             bookList:bookListCopy
         })
-        //console.log(bookListCopy.length);
     }
 
     render() {

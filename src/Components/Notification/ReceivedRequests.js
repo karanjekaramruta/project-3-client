@@ -69,6 +69,7 @@ function getClassNameBasedOnStatus(status){
 
 function getClassNameForButton(status){
     let className="";
-    return status.toLowerCase() === 'accepted' || 'rejected' ? className = "hideButton" : ""
+    status.toLowerCase() === 'accepted' || 'rejected' ? className = "hideButton" : "";
+    return className;
 
 }

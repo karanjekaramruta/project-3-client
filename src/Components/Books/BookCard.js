@@ -116,7 +116,7 @@ class BookCard extends Component {
                                         <p className="control formControl">
                                             <input  required="true" className="input" name="price" type="text" onChange={this.handlePriceChange}/>
                                         </p>
-                                        <a  href="#" onClick={this.addToListHandler}>
+                                        <a  href="/book" onClick={this.addToListHandler}>
                                             <span className="icon"><FontAwesomeIcon icon={(fas, faPlus)} /></span>
                                         </a>
                                     </div>
