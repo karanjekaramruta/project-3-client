@@ -120,7 +120,6 @@ class Books extends Component {
                     <BookCard key={book.id} book={book} />                    
                 ))
             }
-            {/* <BookCard key={book.id} book={book} addToListHandler={this.addToListHandler}/> */}
             </div>
             </section>
             {
